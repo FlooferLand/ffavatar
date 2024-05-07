@@ -1,4 +1,4 @@
-local util = require "util.util"
+local util = require "scripts.ffavatar.utils.util"
 local actionWheelUtil = {}
 
 --- Makes a new config page
