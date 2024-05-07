@@ -1,4 +1,4 @@
-local util = require "scripts.util.util"
+local util = require "util.util"
 local actionWheelUtil = {}
 
 --- Makes a new config page
