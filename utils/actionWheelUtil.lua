@@ -35,8 +35,9 @@ function actionWheelUtil.configMakeAction(item, title, configPath, configOnPress
         :item(item)
         :title(string.format("%s [%s=%s]", title, configStringPath, tostring(configValue)))
         :onLeftClick(function()
+            sounds:playSound("minecraft:item.dye.use",player:getPos(),0.5,1,false)
             configOnPress()
-            AvatarConfig:save()
+            AvatarConfig.save()
             action_wheel:setPage(ActionWheelPages.Main)
         end)
 end
@@ -45,8 +46,6 @@ end
 --- TODO: FIXME: This won't sync correctly! Use Sync Pings to check since it forces backend pings
 ---@param animName string
 function pings.flipDanceAnimation(animName)
-    sounds:playSound("minecraft:item.dye.use",player:getPos(),0.5,1,false)
-
     local pageContent = DancePageContent[animName]
     local anim = pageContent.anim
     local action = pageContent.action
