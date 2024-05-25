@@ -65,6 +65,28 @@ function util.deepCopy(model, name)
     return copy
 end
 
+--- Returns true if a table is an array
+---@param table table
+---@return boolean
+function util.isArray(table)
+    if type(table) ~= 'table' then
+      return false
+    end
+  
+    -- objects always return empty size
+    if #table > 0 then
+      return true
+    end
+  
+    -- only object can have empty length with elements inside
+    for k, v in pairs(table) do
+      return false
+    end
+  
+    -- if no elements it can be array and not at same time
+    return true
+  end
+
 --- Walks through a table until it finds the value and retrieves it.
 --- Essentially getting the value at a path like `myTable.parent.child.value` using strings as indexers instead of code
 ---@param table table
@@ -78,6 +100,27 @@ function util.traverseTable(table, path)
         stringPath = stringPath .. ((#stringPath > 1 ) and "." or "") .. key
     end
     return value, stringPath
+end
+
+---comment
+---@param overriden table
+---@param overwriter table
+---@return table
+function util.concatTables(overriden, overwriter)
+    if util.isArray(overriden) and util.isArray(overwriter) then
+        for _, v in ipairs(overwriter) do
+            table.insert(overriden, v)
+        end
+        return overriden
+    end
+
+    for k, v in pairs(overwriter) do
+        if type(v) == "table" then
+            v = util.concatTables(overriden[k], v)
+        end
+        table.insert(overriden, v)
+    end
+    return overriden
 end
 
 return util
