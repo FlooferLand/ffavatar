@@ -40,7 +40,7 @@ function configMaker.avatarConfigInit()
         end
     }
 
-    return util.concatTables(AvatarConfig, configCore)
+    AvatarConfig = util.concatTables(AvatarConfig, configCore)
 end
 
 return configMaker

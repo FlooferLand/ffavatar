@@ -118,7 +118,7 @@ function util.concatTables(overriden, overwriter)
         if type(v) == "table" then
             v = util.concatTables(overriden[k], v)
         end
-        table.insert(overriden, v)
+        overriden[k] = v
     end
     return overriden
 end
